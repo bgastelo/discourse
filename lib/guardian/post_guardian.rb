@@ -233,7 +233,7 @@ module PostGuardian
     return true if is_admin?
     return false unless can_see_topic?(post.topic)
     return false unless post.user == @user || Topic.visible_post_types(@user).include?(post.post_type)
-    return false if !(is_moderator? || is_category_group_moderator?(post.topic.category)) && post.deleted_at.present?
+    return false if !(is_moderator? || is_category_group_moderator?(post.topic.category)) && (post.deleted_at.present? && post.deleted_by != @user)
 
     true
   end
