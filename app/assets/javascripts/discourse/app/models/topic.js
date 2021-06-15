@@ -356,12 +356,9 @@ const Topic = RestModel.extend({
     }).then(() => this.set("archetype", "regular"));
   },
 
-  afterTopicBookmarked(firstPost) {
-    if (firstPost) {
-      firstPost.set("bookmarked", true);
-      this.set("bookmark_reminder_at", firstPost.bookmark_reminder_at);
-      return [firstPost.id];
-    }
+  afterPostBookmarked(post) {
+    post.set("bookmarked", true);
+    this.set("bookmark_reminder_at", post.bookmark_reminder_at);
   },
 
   firstPost() {
